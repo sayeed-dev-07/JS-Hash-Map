@@ -16,7 +16,20 @@ test.set('lion', 'golden')
 test.set('hat', 'rat')
 
 test.set('moon', 'silver')
+test.set('mo3on', 'silver')
+test.set('mo3o43n', 'silver')
 test.remove('hat')
-test.clear()
+test.remove('kite')
+
+test.remove('lion')
+
+console.log(test.arr);
+
 console.log(test.length());
 console.log(test.capacity);
+console.log(test.keys());
+console.log(test.values());
+console.log(test.entries());
+console.log(test.get('mo3on'));
+
+// it also grow back to orignal size when keys are removed 
