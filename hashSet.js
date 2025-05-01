@@ -1,8 +1,9 @@
-export default class HashMap {
+export default class HashSet {
     constructor(capacity = 16, loadFactor = 0.75) {
         this.capacity = capacity;
         this.loadFactor = loadFactor;
         this.arr = new Array(this.capacity);
+        this.count = 0;
 
     }
     #resize(){
@@ -45,7 +46,7 @@ export default class HashMap {
 
         return hashCode % this.capacity;
     }
-    set(key, value) {
+    set(key, value = null) {
 
         let hashCode = this.#hash(key);
         if (!this.arr[hashCode]) {

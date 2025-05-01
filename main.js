@@ -33,3 +33,15 @@ console.log(test.entries());
 console.log(test.get('mo3on'));
 
 // it also grow back to orignal size when keys are removed 
+
+
+// mapSet
+
+import HashSet from "./hashSet.js";
+let hello = new HashSet();
+hello.set('sayeed');
+hello.set('sayeed');
+hello.set('sayeed');
+hello.set('sayeed');
+console.log(hello.length());
+console.log(hello.arr);
