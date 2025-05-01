@@ -3,6 +3,22 @@ export default class HashMap {
         this.capacity = capacity;
         this.loadFactor = loadFactor;
         this.arr = new Array(this.capacity);
+        this.count = 0;
+
+    }
+    #resize(){
+        let oldArr = this.arr;
+        this.capacity = this.capacity * 2;
+        this.arr = new Array(this.capacity);
+
+        for (const bucket of oldArr) {
+            if (typeof bucket !== 'undefined') {
+                for (const [key, value] of bucket) {
+                    this.set(key, value);
+                }
+            }
+        }
+
 
     }
     #hash(key) {
@@ -21,7 +37,14 @@ export default class HashMap {
         if (!this.arr[hashCode]) {
             this.arr[hashCode] = new Map()
         }
+        
+
+        let newKey = !this.arr[hashCode].has(key)
         this.arr[hashCode].set(key, value)
+
+        if (newKey && this.length() / this.capacity > this.loadFactor) {
+            this.#resize()
+        }
     }
     get(key) {
         let hashCode = this.#hash(key) % this.capacity
@@ -49,6 +72,7 @@ export default class HashMap {
         if (bucket && bucket.has(key)) {
             bucket.delete(key)
             console.log(true);
+            
             return
         }
         console.log(false);
@@ -70,9 +94,11 @@ export default class HashMap {
     clear() {
         for (let i = 0; i < this.arr.length; i++) {
             let element = this.arr[i];
+            this.capacity = 16;
             if (typeof element !== 'undefined') {
                 element.clear();
                 delete this.arr[i];
+
             }
 
         }
